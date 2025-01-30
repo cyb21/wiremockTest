@@ -49,7 +49,9 @@ public class AlternativeServletContainerTest {
   public void supportsAlternativeHttpServerForBasicStub() {
     stubFor(get(urlEqualTo("/alt-server")).willReturn(aResponse().withStatus(204)));
 
-    assertThat(client.get("/alt-server").statusCode(), is(204));
+    int statusCode = client.get("/alt-server").statusCode();
+    System.out.println("Статус код в ответе: " + statusCode);
+    assertThat(statusCode, is(204));
       try {
           sleep(32_000);
       } catch (InterruptedException e) {
